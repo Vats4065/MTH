@@ -1,0 +1,58 @@
+/* src/assets/registerpage.css */
+
+.register-page {
+  background-color: #f8f9fa;
+}
+
+.register-card {
+  padding: 2rem;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.register-card .form-label {
+  font-weight: bold;
+}
+
+.register-card .form-control {
+  border-radius: 4px;
+}
+
+.register-card .btn-dark {
+  background-color: #343a40;
+  border: none;
+  border-radius: 4px;
+}
+
+.register-card .btn-dark:hover {
+  background-color: #23272b;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .register-card {
+    padding: 1rem;
+  }
+
+  .register-card .form-control {
+    font-size: 0.875rem;
+  }
+
+  .register-card .btn-dark {
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .register-card {
+    padding: 1.5rem;
+  }
+
+  .register-card .form-control {
+    font-size: 1rem;
+  }
+
+  .register-card .btn-dark {
+    font-size: 1rem;
+  }
+}

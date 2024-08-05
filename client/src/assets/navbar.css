@@ -1,0 +1,18 @@
+.navbar-custom {
+  transition: all 0.3s ease;
+}
+
+.sticky-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+
+.sticky-navbar.scrolled {
+  background-color: #343a40;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-shadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}

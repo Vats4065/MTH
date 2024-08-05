@@ -1,0 +1,78 @@
+/* src/assets/contactpage.css */
+
+.contact-card {
+  padding: 2rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.contact-card .form-label {
+  font-weight: bold;
+}
+
+.contact-card .form-control {
+  border-radius: 4px;
+}
+
+.contact-card .btn-primary {
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+}
+
+.contact-card .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Contact details styles */
+.contact-details h5 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.contact-details ul {
+  padding-left: 0;
+}
+
+.contact-details li {
+  display: flex;
+  align-items: center;
+}
+
+.contact-details .fa-icon {
+  font-size: 1.2rem;
+  color: #007bff;
+}
+
+.contact-details .me-2 {
+  margin-right: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .contact-card {
+    padding: 1rem;
+  }
+
+  .contact-card .form-control {
+    font-size: 0.875rem;
+  }
+
+  .contact-card .btn-primary {
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .contact-card {
+    padding: 1.5rem;
+  }
+
+  .contact-card .form-control {
+    font-size: 1rem;
+  }
+
+  .contact-card .btn-primary {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,17 @@
+.card-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@media (max-width: 576px) {
+  .card-img {
+    height: 180px;
+  }
+}
+
+@media (max-width: 767px) {
+  .mb-4 {
+    margin-bottom: 2rem;
+  }
+}
