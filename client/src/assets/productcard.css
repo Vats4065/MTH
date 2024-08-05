@@ -1,7 +1,7 @@
 .product-card {
   transition: transform 0.3s, box-shadow 0.3s;
   overflow: hidden;
-  perspective: 1000px; /* Apply perspective to the card */
+  perspective: 1000px;
 }
 
 .product-card:hover {
@@ -15,7 +15,7 @@
 }
 
 .product-card:hover .image-container {
-  transform: rotateY(10deg) rotateX(10deg); /* Rotate to create 3D effect */
+  transform: rotateY(10deg) rotateX(10deg);
 }
 
 .card-img {
@@ -23,7 +23,7 @@
 }
 
 .product-card:hover .card-img {
-  transform: scale(1.1); /* Scale image on hover */
+  transform: scale(1.1);
 }
 
 .card-body {

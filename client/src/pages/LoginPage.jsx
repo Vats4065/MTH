@@ -34,7 +34,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-pge">
+    <div className="login-page">
       <Container className="d-flex align-items-center justify-content-center min-vh-100 ">
         <Row className="w-100">
           <Col xs={12} sm={10} md={8} lg={6} className="mx-auto">

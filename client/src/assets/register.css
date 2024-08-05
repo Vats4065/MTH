@@ -1,5 +1,3 @@
-/* src/assets/registerpage.css */
-
 .register-page {
   background-color: #f8f9fa;
 }
@@ -28,7 +26,6 @@
   background-color: #23272b;
 }
 
-/* Responsive adjustments */
 @media (max-width: 576px) {
   .register-card {
     padding: 1rem;

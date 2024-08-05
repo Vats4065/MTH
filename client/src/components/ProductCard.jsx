@@ -3,18 +3,19 @@ import { Card, Button } from "react-bootstrap";
 import "../assets/productcard.css";
 
 const ProductCard = ({ product }) => {
+  console.log(product);
   return (
     <Card className="shadow-lg border-light rounded product-card">
       <div className="image-container">
         <Card.Img
           variant="top"
-          src={product.image}
+          src={`http://localhost:5000/${product?.image}`}
           alt={product.name}
           className="card-img"
         />
       </div>
       <Card.Body>
-        <Card.Title className="text-center">{product.name}</Card.Title>
+        <Card.Title className="text-center">{product?.name}</Card.Title>
         <Card.Text className="text-center text-muted">
           ${product.price}
         </Card.Text>

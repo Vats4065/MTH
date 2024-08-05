@@ -39,7 +39,7 @@ const RegisterPage = () => {
     const data = await registerServiceApi(name, email, password, phoneNumber);
     console.log(data);
 
-    if (data.data) {
+    if (data?.data) {
       navigate("/");
     }
   };
