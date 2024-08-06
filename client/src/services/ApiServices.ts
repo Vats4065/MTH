@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 
 interface UserResponse {
   data: {
-    id: string;
+    _id: string;
     name: string;
     email: string;
     phoneNumber: string;
@@ -10,11 +10,11 @@ interface UserResponse {
 }
 
 interface LoginResponse {
-  token: string;
   user: {
-    id: string;
+    _id: string;
     name: string;
     email: string;
+    phoneNumber: string;
   };
 }
 
@@ -44,17 +44,18 @@ export const registerServiceApi = async (
 export const loginServiceApi = async (
   email: string,
   password: string
-): Promise<LoginResponse | void> => {
+): Promise<LoginResponse> => {
   try {
     const response: AxiosResponse<LoginResponse> = await axios.post(
       "http://localhost:5000/api/user/login",
       { email, password }
     );
+    console.log(response);
+
     return response.data;
   } catch (error) {
     console.error("Login failed:", error);
-
-    return;
+    throw error;
   }
 };
 

@@ -2,18 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Navbar, Nav, Container, Stack } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/navbar.css";
-import { findUserByApi } from "../services/ApiServices";
+import axios from "axios";
 
 interface UserDetails {
-  user: {
-    name: string;
-  };
+  id: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
 }
 
-const NavbarComponent: React.FC = () => {
+const NavbarComponent = () => {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
-  const userId = localStorage.getItem("MTH-login");
+  const userId: string | null = localStorage.getItem("MTH-login");
 
   const handleLogout = () => {
     localStorage.removeItem("MTH-login");
@@ -23,12 +24,12 @@ const NavbarComponent: React.FC = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       if (userId) {
-        const response = await findUserByApi(userId);
-        if (response && response.data) {
-          // setUserDetails(response);
-          console.log();
-        } else {
-          setUserDetails(null);
+        const response = await axios.get(
+          `http://localhost:5000/api/user/${userId}`
+        );
+
+        if (response?.data) {
+          setUserDetails(response?.data?.user);
         }
       } else {
         setUserDetails(null);
@@ -130,9 +131,9 @@ const NavbarComponent: React.FC = () => {
               </>
             )}
           </Stack>
-          {userDetails?.user && (
+          {userDetails && (
             <Navbar.Text className="text-capitalize">
-              Welcome {userDetails.user.name}
+              Welcome {userDetails.name}
             </Navbar.Text>
           )}
         </Navbar.Collapse>

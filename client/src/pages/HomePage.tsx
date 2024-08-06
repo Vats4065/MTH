@@ -5,7 +5,7 @@ import "../assets/home.css";
 import axios, { AxiosResponse } from "axios";
 
 interface Product {
-  id: string;
+  _id: string;
   name: string;
   price: number;
   image: string;
@@ -21,7 +21,7 @@ const HomePage: React.FC = () => {
         const response: AxiosResponse<Product[]> = await axios.get(
           "http://localhost:5000/api/admin/product"
         );
-        console.log(response);
+
         if (response.status === 200) {
           setProducts(response.data);
         }
@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
       <Row xs={1} sm={2} md={3} lg={4} className="g-4">
         {products.length > 0 ? (
           products.map((product) => (
-            <Col key={product.id} className="d-flex justify-content-center">
+            <Col key={product?._id} className="d-flex justify-content-center">
               <ProductCard product={product} />
             </Col>
           ))
