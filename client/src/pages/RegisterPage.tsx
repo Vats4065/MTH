@@ -12,18 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { registerServiceApi } from "../services/ApiServices";
 import "../assets/register.css";
 
-// Define the type for the state variables
-interface RegisterPageState {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  phoneNumber: string;
-  error: string;
-}
-
 const RegisterPage: React.FC = () => {
-  // State with type annotations
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -32,7 +21,6 @@ const RegisterPage: React.FC = () => {
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
 
-  // Update handleSubmit to use FormEvent type
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!name || !email || !password || !confirmPassword || !phoneNumber) {

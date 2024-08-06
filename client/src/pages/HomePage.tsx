@@ -2,17 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ProductCard from "../components/ProductCard";
 import "../assets/home.css";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 
 interface Product {
   id: string;
   name: string;
   price: number;
   image: string;
-}
-
-interface ProductsResponse {
-  data: Product[];
 }
 
 const HomePage: React.FC = () => {
@@ -55,6 +51,11 @@ const HomePage: React.FC = () => {
         ) : (
           <Col className="d-flex justify-content-center w-100 text-center text-secondary">
             <h3>No products available</h3>
+          </Col>
+        )}
+        {error && (
+          <Col className="d-flex justify-content-center w-100 text-center text-danger">
+            <h3>{error}</h3>
           </Col>
         )}
       </Row>

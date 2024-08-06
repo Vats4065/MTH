@@ -1,17 +1,5 @@
 import axios, { AxiosResponse } from "axios";
 
-interface RegisterRequest {
-  name: string;
-  email: string;
-  password: string;
-  phoneNumber: string;
-}
-
-interface LoginRequest {
-  email: string;
-  password: string;
-}
-
 interface UserResponse {
   data: {
     id: string;
@@ -19,13 +7,6 @@ interface UserResponse {
     email: string;
     phoneNumber: string;
   };
-}
-
-interface ProductRequest {
-  name: string;
-  price: number;
-  description: string;
-  image: string;
 }
 
 interface LoginResponse {
