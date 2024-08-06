@@ -14,7 +14,7 @@ app.use('/api/user', userRouter)
 app.use('/api/admin', adminRouter)
 
 app.listen(5000, () => {
-    db()
-    console.log('listening on port');
+  db()
+  console.log('listening on port');
 })
 
