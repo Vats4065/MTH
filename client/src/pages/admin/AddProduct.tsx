@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import {
   Container,
   Row,
@@ -10,15 +10,15 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 
-const AddProduct = () => {
-  const [productName, setProductName] = useState("");
-  const [productPrice, setProductPrice] = useState("");
-  const [productDescription, setProductDescription] = useState("");
-  const [productImage, setProductImage] = useState(null);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+const AddProduct: React.FC = () => {
+  const [productName, setProductName] = useState<string>("");
+  const [productPrice, setProductPrice] = useState<string>("");
+  const [productDescription, setProductDescription] = useState<string>("");
+  const [productImage, setProductImage] = useState<File | null>(null);
+  const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!productName || !productPrice || !productDescription || !productImage) {
@@ -32,28 +32,37 @@ const AddProduct = () => {
     formData.append("description", productDescription);
     formData.append("image", productImage);
 
-    const response = await axios.post(
-      "http://localhost:5000/api/admin/addProduct",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/admin/addProduct",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response);
+
+      if (response.data) {
+        setSuccess("Product added successfully!");
+        setProductName("");
+        setProductPrice("");
+        setProductDescription("");
+        setProductImage(null);
       }
-    );
-    console.log(response);
 
-    if (response.data) {
-      setSuccess("Product added successfully!");
-      setProductName("");
-      setProductPrice("");
-      setProductDescription("");
-      setProductImage(null);
+      if (response.data.error) {
+        setError(response.data.error);
+      }
+    } catch (err) {
+      setError("An error occurred while adding the product.");
     }
+  };
 
-    if (response.data.error) {
-      setError(response.data.error);
-    }
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    setProductImage(file);
   };
 
   return (
@@ -102,7 +111,7 @@ const AddProduct = () => {
                   <Form.Control
                     type="file"
                     accept="image/*"
-                    onChange={(e) => setProductImage(e.target.files[0])}
+                    onChange={handleFileChange}
                     required
                   />
                 </Form.Group>

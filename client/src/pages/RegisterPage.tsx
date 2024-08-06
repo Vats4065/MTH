@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import {
   Container,
   Row,
@@ -12,16 +12,28 @@ import { useNavigate } from "react-router-dom";
 import { registerServiceApi } from "../services/ApiServices";
 import "../assets/register.css";
 
-const RegisterPage = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [error, setError] = useState("");
+// Define the type for the state variables
+interface RegisterPageState {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  phoneNumber: string;
+  error: string;
+}
+
+const RegisterPage: React.FC = () => {
+  // State with type annotations
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [error, setError] = useState<string>("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  // Update handleSubmit to use FormEvent type
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!name || !email || !password || !confirmPassword || !phoneNumber) {
       setError("Please fill in all fields");
@@ -36,11 +48,16 @@ const RegisterPage = () => {
       return;
     }
 
-    const data = await registerServiceApi(name, email, password, phoneNumber);
-    console.log(data);
+    try {
+      const data = await registerServiceApi(name, email, password, phoneNumber);
+      console.log(data);
 
-    if (data?.data) {
-      navigate("/");
+      if (data?.data) {
+        navigate("/");
+      }
+    } catch (err) {
+      setError("An error occurred during registration");
+      console.error(err);
     }
   };
 
@@ -86,7 +103,7 @@ const RegisterPage = () => {
                       required
                       className="register-input"
                       pattern="\d{10}"
-                      maxLength="10"
+                      maxLength={10}
                     />
                   </Form.Group>
                   <Form.Group controlId="formBasicPassword" className="mt-3">

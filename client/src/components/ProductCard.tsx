@@ -2,8 +2,18 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 import "../assets/productcard.css";
 
-const ProductCard = ({ product }) => {
-  console.log(product);
+// Define the type for the product prop
+interface Product {
+  name: string;
+  price: number;
+  image: string;
+}
+
+interface ProductCardProps {
+  product: Product;
+}
+
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <Card className="shadow-lg border-light rounded product-card">
       <div className="image-container">
@@ -15,9 +25,9 @@ const ProductCard = ({ product }) => {
         />
       </div>
       <Card.Body>
-        <Card.Title className="text-center">{product?.name}</Card.Title>
+        <Card.Title className="text-center">{product.name}</Card.Title>
         <Card.Text className="text-center text-muted">
-          ${product.price}
+          ${product.price.toFixed(2)}
         </Card.Text>
         <div className="d-grid">
           <Button variant="dark">View Details</Button>

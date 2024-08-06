@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import "../assets/productpage.css";
 
-const ProductPage = () => {
+const ProductPage: React.FC = () => {
   return (
     <Container className="my-5">
       <Row>

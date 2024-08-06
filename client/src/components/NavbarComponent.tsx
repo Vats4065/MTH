@@ -4,37 +4,39 @@ import { Link, useNavigate } from "react-router-dom";
 import "../assets/navbar.css";
 import { findUserByApi } from "../services/ApiServices";
 
-const NavbarComponent = () => {
+interface UserDetails {
+  user: {
+    name: string;
+  };
+}
+
+const NavbarComponent: React.FC = () => {
   const navigate = useNavigate();
-  const [userDetails, setUserDetails] = useState({});
+  const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const userId = localStorage.getItem("MTH-login");
+
   const handleLogout = () => {
     localStorage.removeItem("MTH-login");
     navigate("/login");
   };
 
   useEffect(() => {
-    if (userId) {
-      findUserByApi(userId).then((data) => setUserDetails(data?.data));
-    }
-  }, [userId]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const navbar = document.querySelector(".navbar-custom");
-      if (window.scrollY > 50) {
-        navbar.classList.add("scrolled");
+    const fetchUserDetails = async () => {
+      if (userId) {
+        const response = await findUserByApi(userId);
+        if (response && response.data) {
+          // setUserDetails(response);
+          console.log();
+        } else {
+          setUserDetails(null);
+        }
       } else {
-        navbar.classList.remove("scrolled");
+        setUserDetails(null);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+    fetchUserDetails();
+  }, [userId]);
 
   return (
     <Navbar
@@ -83,9 +85,9 @@ const NavbarComponent = () => {
                     Contact
                   </Link>
                   <Link
-                    as="button"
-                    className="link-dark text-decoration-none"
+                    className="link-dark text-decoration-none cursor-pointer"
                     onClick={handleLogout}
+                    to={""}
                   >
                     Logout
                   </Link>
@@ -119,9 +121,9 @@ const NavbarComponent = () => {
                   Contact
                 </Link>
                 <Link
-                  as="button"
-                  className="link-dark text-decoration-none"
+                  className="link-dark text-decoration-none cursor-pointer"
                   onClick={handleLogout}
+                  to={""}
                 >
                   Logout
                 </Link>
@@ -130,7 +132,7 @@ const NavbarComponent = () => {
           </Stack>
           {userDetails?.user && (
             <Navbar.Text className="text-capitalize">
-              Welcome {userDetails?.user?.name}{" "}
+              Welcome {userDetails.user.name}
             </Navbar.Text>
           )}
         </Navbar.Collapse>
