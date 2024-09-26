@@ -3,6 +3,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import ProductCard from "../components/ProductCard";
 import "../assets/home.css";
 import axios, { AxiosResponse } from "axios";
+import addNotification from "react-push-notification";
+import { Notifications } from "react-push-notification";
 
 interface Product {
   _id: string;
@@ -14,6 +16,35 @@ interface Product {
 const HomePage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [name, setName] = useState("");
+
+  function warningNotification() {
+    addNotification({
+      title: "Warning",
+      subtitle: "Please fill it",
+      message: "You have to enter name",
+      theme: "red",
+      closeButton: "X",
+    });
+  }
+
+  function successNotification() {
+    addNotification({
+      title: "Success",
+      subtitle: "You have successfully submitted",
+      message: "Welcome to GeeksforGeeks",
+      theme: "light",
+      closeButton: "X",
+      backgroundTop: "green",
+      backgroundBottom: "yellowgreen",
+    });
+  }
+
+  function handleSubmit(e: { preventDefault: () => void }) {
+    e.preventDefault();
+    if (name === "") warningNotification();
+    else successNotification();
+  }
 
   useEffect(() => {
     const getAll = async () => {
@@ -60,6 +91,17 @@ const HomePage: React.FC = () => {
         )}
       </Row>
     </Container>
+    // <form>
+    //   <label>Name:</label>
+    //   <input
+    //     name="name"
+    //     value={name}
+    //     onChange={(e) => setName(e.target.value)}
+    //   />
+    //   <button onClick={handleSubmit} type="submit">
+    //     Submit
+    //   </button>
+    // </form>
   );
 };
 
